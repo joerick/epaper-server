@@ -1,0 +1,7 @@
+Flask
+gunicorn
+Pillow
+requests
+pip-tools
+python-dateutil
+pytz

@@ -1,0 +1,5 @@
+#!/bin/sh
+
+set -o errexit
+
+gcloud run deploy epaper-server  --source . --region europe-west1
