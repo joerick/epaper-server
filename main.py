@@ -10,14 +10,15 @@ import pytz
 
 app = Flask(__name__)
 
-small_font = ImageFont.truetype("SourceSansPro-Regular.ttf", 14)
-font = ImageFont.truetype("OpenSans-Regular.ttf", 14)
-font_semibold = ImageFont.truetype("OpenSans-SemiBold.ttf", 14)
-font_bold = ImageFont.truetype("OpenSans-Bold.ttf", 14)
+small_font = ImageFont.truetype("fonts/SourceSansPro-Regular.ttf", 14)
+font = ImageFont.truetype("fonts/OpenSans-Regular.ttf", 14)
+font_semibold = ImageFont.truetype("fonts/OpenSans-SemiBold.ttf", 14)
+font_bold = ImageFont.truetype("fonts/OpenSans-Bold.ttf", 14)
 
 
 def draw_image():
-    forecast = weather.get_weather_test_data()
+    # forecast = weather.get_weather_test_data()
+    forecast = weather.get_weather()
     # print(forecast)
 
     w = 400
