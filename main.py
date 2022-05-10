@@ -186,7 +186,7 @@ def draw_with_levels(draw: ImageDraw.ImageDraw, xy: tuple[float, float], image: 
     
 
 @app.route("/")
-def hello_world():
+def get_forecast_image():
     im = draw_image()
     im = im.convert('1')
 
@@ -194,6 +194,10 @@ def hello_world():
     im.save(im_byte_arr, format='BMP')
     return im_byte_arr.getvalue(), 200, {'content-type': 'image/bmp'}
 
+
+@app.route("/time")
+def get_time():
+    return {"time": time.time()}
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
