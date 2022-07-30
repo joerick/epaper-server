@@ -1,4 +1,5 @@
-from datetime import timedelta
+from datetime import timedelta, timezone
+import datetime
 import io
 import os
 import time
@@ -7,6 +8,7 @@ from flask import Flask
 from PIL import Image, ImageDraw, ImageFont, ImageOps
 import weather
 import pytz
+from werkzeug.exceptions import HTTPException
 
 app = Flask(__name__)
 
@@ -197,7 +199,32 @@ def get_forecast_image():
 
 @app.route("/time")
 def get_time():
-    return {"time": time.time()}
+    d = datetime.datetime.now(timezone.utc)
+
+    return {
+        "time": time.time(),
+        "hour": d.hour,
+        "minute": d.minute,
+        "second": d.second,
+    }
+
+
+@app.errorhandler(Exception)
+def handle_exception(e):
+    # pass through HTTP errors
+    if isinstance(e, HTTPException):
+        return e
+
+    # now you're handling non-HTTP exceptions only
+    message = str(e)
+
+    # scrub api key
+    message = message.replace(weather.API_KEY, '<key>')
+
+    return {
+        "type": "error",
+        "message": message,
+    }, 500
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
