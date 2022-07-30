@@ -56,7 +56,7 @@ def draw_image():
     temp_low = min(h.temperature for h in forecast.today_hours)
 
     draw.text((62, 75), f'{temp_high:.0f}°', font=font_semibold.font_variant(size=40), anchor='ls')
-    draw.text((142, 75), f'{temp_low:.0f}°', font=font_bold.font_variant(size=18), anchor='ls')
+    # draw.text((142, 75), f'{temp_low:.0f}°', font=font_bold.font_variant(size=18), anchor='ls')
 
     ##############
     # DRAW GRAPH #
